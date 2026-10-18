@@ -13,6 +13,40 @@ Menu chooses Receive/Return, Scan starts, then tap student ID and item tag,
 and press Scan again to save. Menu cancels before confirmation. The green LED
 means the server confirmed a saved transaction; red indicates an error.
 
+## Windows desktop app
+
+The desktop app provides USB port selection, Receive / Return scan guidance,
+server-confirmed save results, recent session activity, and an API settings page.
+It uses the same signed API and scanner protocol as the CLI. No firmware changes
+are needed. Scan and Menu actions still use the physical station buttons.
+
+On Windows, install Python 3.9+ from python.org (include the Python launcher),
+then double-click `start-windows.bat`. The first launch installs PySerial and
+requires internet access. Choose **API settings**, enter your registered scanner
+credentials, and save. On **Station**, select the ESP32 COM port and click
+**Connect**. Close Arduino Serial Monitor and other bridge apps first.
+
+To make a standalone Windows executable, double-click `build-windows.bat`
+on a Windows PC. It installs the build dependencies and produces
+`dist\RFID-Station.exe`, which can run without Python installed. Credentials
+are not included in the build. The executable must be built and tested on Windows;
+the Linux checkout does not contain a prebuilt Windows executable.
+
+Desktop settings are stored in `%LOCALAPPDATA%\RFID Station\rfid_config.json`,
+including the device secret. The app imports the existing CLI config on first
+launch if available; **Save settings** stores its own per-user copy. Existing
+`RFID_*` environment variables override saved values at startup. Activity is
+limited to the latest 300 messages in memory and is cleared when the app closes.
+Disconnect and close finish the current API request before releasing the port.
+For an unconfirmed save, retry the same transaction using the station Scan button.
+
+For development on any platform with Tk installed:
+
+```sh
+python -m pip install -r requirements-bridge.txt
+python rfid_desktop.py
+```
+
 ## Run the CLI
 
 From this folder, run setup once:

@@ -6,3 +6,7 @@ __pycache__/
 rfid_config.json
 .rfid-config-*
 supabase/.temp/
+.venv-desktop/
+build/
+dist/
+*.spec
