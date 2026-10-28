@@ -11,7 +11,7 @@ const hex32 = /^[0-9a-f]{32}$/
 const hex64 = /^[0-9a-f]{64}$/
 const stages = new Set(['idle', 'scan_student', 'scan_item', 'confirm', 'success', 'error'])
 const messages: Record<string, string> = {
-  idle: 'Standby Monitor',
+  idle: '',
   scan_student: 'Tap Student ID',
   scan_item: 'Tap Equipment Tag',
   confirm: 'Await Confirmation',
